@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <div>
+      <label for="surname">Vorname: </label>
+      <input type="text" id="surname" placeholder="Gib deinen Vornamen ein">
+    </div>
+    <div>
+      <label for="name">Name: </label>
+      <input type="text" id="name" placeholder="Gib deinen Nachnamen ein">
+    </div>
+    <div>
+      <label for="age">Alter: </label>
+      <select id="age">
+        <option selected disabled>Bitte wählen</option>
+        <script>
+          const createNumberList = function() {
+            const select = document.getElementById('age');
+
+            // Zahlen hinzufuegen
+            for(let i = 6; i <= 80; i++) {
+              // Neues Option Element anlegen
+              const option = document.createElement('option');
+              option.value = i;
+              option.textContent = i;
+              select.appendChild(option);
+            }
+          }
+          createNumberList();
+        </script>
+      </select>
+    </div>
+    <div>
+      <label for="sex">Geschlecht: </label>
+      <select id="sex" name="sex">
+        <option selected disabled>Bitte wählen...</option>
+        <option value="M">M</option>
+        <option value="W">W</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button id="createUser">Anlegen</button>
+  </div>
+  <div>
+    <ul id="user-table">
+      <li>
+        <table>
+          <tr>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Alter</th>
+            <th>Geschlecht</th>
+          </tr>
+        </table>
+      </li>
+    </ul>
+  </div>
+  <script src="User.js"></script>
+</body>
+</html>
