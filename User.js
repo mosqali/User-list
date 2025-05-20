@@ -37,22 +37,23 @@ const DeleteInputFields = function() {
 
 // Tabelle hinzufuegen
 const AddToTable = function(x, y, z, a) {
-  const dataRow = document.createElement('tr');
+  const newRow = document.createElement('tr');
+  document.createElement('tr');
   [x, z, y, a].forEach(text => {
     const td = document.createElement('td');
     td.textContent = text;
-    dataRow.appendChild(td);
+    newRow.appendChild(td);
   })
-  table.appendChild(dataRow);
+  table.appendChild(newRow);
 }
 
-createUser.addEventListener('click', function() {
-  // in liste das objekt hinzufuegen
-  userList.push(createUserObj(surname.value, name.value, age.value, sex.value));
-  console.log(userList)
+createUser.addEventListener('click', function () {
+  if (surname.value !== '' && name.value !== '' && age.value !== 'Bitte wählen' && sex.value !== 'Bitte wählen...') {
+    // in Liste das objekt hinzufuegen
+    userList.push(createUserObj(surname.value, name.value, age.value, sex.value));
 
-  // Tabelle hinzufuegen
-  AddToTable(surname.value, name.value, age.value, sex.value);
-  console.log(this.userList, name.value, age.value, sex.value);
-  DeleteInputFields();
+    // Tabelle hinzufuegen
+    AddToTable(surname.value, name.value, age.value, sex.value);
+    DeleteInputFields();
+  }
 })
