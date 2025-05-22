@@ -8,10 +8,6 @@ const sex = document.getElementById('sex');
 const table = document.getElementById('user-table');
 
 
-
-// Liste erstellen
-const userList = []
-
 // Objekt Benutzer
 class User{
   constructor(surname, name, age, sex){
@@ -21,6 +17,7 @@ class User{
     this.sex = sex;
   }
 }
+
 
 // Benutzer anlegen
 const createUserObj = function(surname, name, age, sex) {
@@ -36,10 +33,9 @@ const DeleteInputFields = function() {
 }
 
 // Tabelle hinzufuegen
-const AddToTable = function(x, y, z, a) {
+const AddToTable = function(surname, name, age, sex) {
   const newRow = document.createElement('tr');
-  document.createElement('tr');
-  [x, z, y, a].forEach(text => {
+  [surname, name, age, sex].forEach(text => {
     const td = document.createElement('td');
     td.textContent = text;
     newRow.appendChild(td);
@@ -47,13 +43,45 @@ const AddToTable = function(x, y, z, a) {
   table.appendChild(newRow);
 }
 
+// Tabelle updaten
+const UpdateTable = function() {
+      // Daten Abrufen
+      let savedData = localStorage.getItem('userData');
+      let oUser = JSON.parse(savedData);
+}
+
+const LocalstorageData = function() {
+      // Objekt in localstorage speichern
+      let data = JSON.parse(localStorage.getItem('userData'));
+
+      if(Array.isArray(data)) {
+        data.push(createUserObj(surname.value, name.value, age.value, sex.value));
+        localStorage.setItem('userData', JSON.stringify(data));
+      }
+      else {
+        localStorage.setItem('userData', JSON.stringify([createUserObj(surname.value, name.value, age.value, sex.value)])); // setItem('key', string)
+      }
+      return data;
+}
+
 createUser.addEventListener('click', function () {
   if (surname.value !== '' && name.value !== '' && age.value !== 'Bitte wählen' && sex.value !== 'Bitte wählen...') {
-    // in Liste das objekt hinzufuegen
-    userList.push(createUserObj(surname.value, name.value, age.value, sex.value));
 
-    // Tabelle hinzufuegen
-    AddToTable(surname.value, name.value, age.value, sex.value);
+    // Objekt in localstorage speichern
+    LocalstorageData();
+    console.log(LocalstorageData())
+
+    // Zur Tabelle hinzufuegen
+    const userList = JSON.parse(localStorage.getItem('userData'))
+    userList.foreach(user => {
+      let line = document.createElement('')
+    })
+
+    //Deleting
     DeleteInputFields();
   }
 })
+
+window.onload = function() {
+  UpdateTable();
+}
